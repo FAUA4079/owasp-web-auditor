@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "owasp-web-auditor"
+version = "0.2.0rc1"
+description = "Bounded web configuration checks with evidence, resume and offline reports"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.28.1,<0.29",
+  "beautifulsoup4>=4.13,<5",
+  "Jinja2>=3.1.6,<4",
+  "jsonschema>=4.26,<5",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Operating System :: POSIX :: Linux",
+  "Topic :: Security",
+]
+
+[project.scripts]
+owasp-auditor = "auditor.cli:main"
+owasp-auditor-report = "auditor.reporting.html_report:main"
+owasp-auditor-validate = "auditor.reporting.validation:main"
+owasp-auditor-integrity = "auditor.verification.integrity:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["auditor", "auditor.*"]
+exclude = ["auditor.*.__pycache__", "auditor.__pycache__"]
+namespaces = true
+
+[tool.setuptools.package-data]
+auditor = ["data/*.json", "reporting/templates/*.html", "reporting/schemas/*.json", "rules/schema.json", "rules/metadata/*.json"]
+
+[tool.setuptools]
+include-package-data = false

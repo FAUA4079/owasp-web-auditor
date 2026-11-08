@@ -1,85 +1,120 @@
 # OWASP Web Auditor
 
-**Version:** `0.2.0rc1` — independently developed, research-oriented Python web-security auditing CLI.
+**Research-oriented, bounded web security auditing CLI — v0.2.0rc1 (research prototype)**
 
-> **Not an official OWASP product or certified scanner.** Only scan systems you own or are explicitly authorized to test. This is an educational/research prototype, not a replacement for production DAST or a guarantee of security.
+> **Not an official OWASP project or OWASP-certified scanner.** It is an independent educational/research implementation. It is **not** a production-ready DAST replacement and cannot certify that any website is secure. Run it **only against systems you own or have explicit authorization to test**.
 
-## Features
+OWASP Web Auditor combines **13 deterministic security checks (CHK01–CHK13)**, bounded crawling/HTTP requests, opt-in authenticated AuditShop checks, JSON/HTML evidence and integrity verification, and optional **Ollama** AI explanations. AI is **never used to define detection rules, assign vulnerability verdicts, invent evidence or create benchmark ground-truth labels**.
 
-- 13 deterministic, research-mapped checks (`CHK01–CHK13`), with OWASP ASVS / CWE traceability.
-- Passive and bounded active web observations, optional page discovery, and controlled scope.
-- Opt-in authenticated assessment and policy-approved RBAC checks for the supported AuditShop-style adapter.
-- Structured JSON evidence, request ledger, integrity auditing, and generated HTML reports.
-- Optional local Ollama AI explanations and review assistance. AI **does not** generate security rules, labels, evidence or vulnerability verdicts.
-- Checkpoint/resume support and privacy-redacted HTML export.
-- Reproducible first-party lab tests and a limited external OWASP Benchmark Java evaluation framework.
-- GitHub Actions test workflow.
+## Features at a glance
+
+| Area | Capability |
+| --- | --- |
+| Public HTTP checks | CHK01–CHK08: selected HTTPS/header, cookie, error disclosure, directory listing, reflection and exceptional-input checks |
+| Authenticated lab checks | CHK09–CHK13: opt-in AuditShop-specific authorization/session checks, including CHK13 human-approved RBAC policy |
+| Scanning boundaries | Limited requests/time/crawl depth/response sizes; same-origin scope; standard TLS verification enabled |
+| Evidence/reporting | JSON evidence, request ledger, HTML report, resumable runs and optional SHA-256 source manifest |
+| AI reporting | Local Ollama or OpenAI-compatible provider, optional explanatory text and review; deterministic findings remain authoritative |
+| Research | Traceability to rule metadata, reproducible first-party E2E tests, external benchmark provenance and review-gated scoring |
+| Test/release | Python `pytest` suite, GitHub Actions CI, Python wheel and sdist builds |
+
+## Project status and scientific limitations
+
+- **Last independently supplied Kali RC1 verification:** Python 3.14, **232 tests and 41 subtests passed**; **13 metadata records schema-valid**; CLI version `0.2.0rc1`; wheel and source distribution built successfully. Your own GitHub Actions runs must be checked after publishing.
+- A subset of **OWASP Benchmark Java 1.2** was evaluated using the existing CHK04 detector: `BenchmarkTest00016` was `No Issue Observed`, and `BenchmarkTest00087` was `Potential`. **Human review is still pending**; do not advertise these as final TP/TN counts. Other selected external benchmark cases are unexecuted.
+- A `Potential` finding is **not** a proven vulnerability. Passing unit/E2E tests does **not** establish real-world sensitivity, precision or recall.
+- CHK09–CHK13 have an **AuditShop-specific authenticated adapter**; they do not automatically test arbitrary websites.
+- This repository does **not** include sensitive scan runs, stored credentials, VM artifacts or live benchmark captures.
 
 ## Requirements
 
-- Linux, including Kali, with Python 3.11+ (the release candidate was verified under Kali Python 3.14).
-- Internet connectivity for Python package installation.
-- Optional Windows host running Ollama (tested with `qwen3:8b`).
-- SSH connectivity from Windows to Kali for the optional AI tunnel.
+- Linux/Kali recommended (Python **3.11+**; tested on Kali Python 3.14)
+- `python3`, `python3-venv`, `git`, a terminal, and internet access **only to download Python dependencies**
+- Optional: Windows Ollama `qwen3:8b` through SSH reverse port forwarding to a Kali VM
+- Optional: Docker for self-owned local benchmark/lab applications
 
-## Install from a fresh GitHub clone
+Do not use system-wide `sudo pip install`; use a project virtual environment.
+
+## 1. Clone from GitHub and install (fresh Kali)
+
+When this repository has been published, replace `YOUR_REPOSITORY_NAME` with its actual name:
 
 ```bash
-git clone https://github.com/FAUA4079/owasp-web-auditor-research.git
-cd owasp-web-auditor-research
-
+git clone https://github.com/FAUA4079/YOUR_REPOSITORY_NAME.git
+cd YOUR_REPOSITORY_NAME
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e . pytest build
-
 python -m auditor --version
+python -m auditor --list-checks
 python -m auditor.rules --validate
 python -m pytest -q
 python -m build
 ```
 
-Expected CLI version: `auditor 0.2.0rc1`. In the release-candidate Kali verification, **232 tests and 41 subtests passed**. These reflect unit/integration checks, **not** proven vulnerability detection accuracy.
+You should see `auditor 0.2.0rc1`; the test count may change if the repository is updated. `python -m build` creates `dist/*.whl` and `dist/*.tar.gz` for this Python package.
 
-### Basic authorized localhost scan
+**No AI server is required for deterministic scanning, testing or building the package.**
 
-Terminal 1:
+### Install only the wheel (alternative)
+
+```bash
+python3 -m venv ~/owa-wheel-env
+source ~/owa-wheel-env/bin/activate
+python -m pip install ./dist/owasp_web_auditor-0.2.0rc1-py3-none-any.whl
+owasp-auditor --version
+```
+
+## 2. First scan: your own localhost demonstration
+
+**Kali terminal A** (keep this running):
 
 ```bash
 mkdir -p /tmp/owa-demo
-printf '<html><body><h1>Authorized local demo</h1></body></html>\n' > /tmp/owa-demo/index.html
+printf '<html><body><h1>Local OWA Demo</h1></body></html>\n' > /tmp/owa-demo/index.html
 python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/owa-demo
 ```
 
-Terminal 2 (inside the project venv):
+**Kali terminal B** (from the repository virtual environment):
 
 ```bash
+cd YOUR_REPOSITORY_NAME
+source .venv/bin/activate
 python -m auditor \
-  --url http://127.0.0.1:8765 \
+  --url http://127.0.0.1:8765/ \
   --no-crawl \
   --output runs/local-demo
 ```
 
-Open the report path printed by the CLI. A basic Python server often lacks security headers; scanner statuses may indicate `Potential` rather than confirmed vulnerabilities.
+The command prints a generated directory like `runs/local-demo/scan-<id>` containing `reports/report.html`, `scan.json`, `results/` and `evidence/`. Find/open the report with:
 
-## Optional AI: Windows Ollama → Kali over an SSH reverse tunnel
+```bash
+find runs/local-demo -path '*/reports/report.html' -type f -print
+# Replace with the path printed by the scan:
+xdg-open runs/local-demo/scan-ACTUAL_ID/reports/report.html
+```
 
-This uses **Windows to run the model** and **Kali to run the scanner**. Ollama stays bound to Windows loopback, and the tunnel binds only to Kali loopback.
+The minimal Python server may produce `Potential` observations because it does not configure production security headers. This is a **local demonstration**, not an external security assessment.
 
-### 1. Windows: install Ollama and obtain the model
+## 3. Optional AI setup — Windows Ollama to Kali VM
 
-In Windows PowerShell:
+The supported example below uses **Windows host Ollama** and **Kali Linux as a VirtualBox guest**. Ollama runs on Windows at `127.0.0.1:11434`; a **reverse SSH tunnel** exposes it *only inside Kali* at `127.0.0.1:11437`. This avoids exposing the model API to the LAN or internet.
+
+### A. Windows PowerShell — start/check Ollama
+
+Install [Ollama](https://ollama.com/download) on Windows, then:
 
 ```powershell
 ollama --version
-ollama list
 ollama pull qwen3:8b
+ollama list
 Invoke-RestMethod http://127.0.0.1:11434/api/tags
 ```
 
-If the Ollama app/service is already running, do **not** execute a second `ollama serve`: a port-11434 "address already in use" error simply means the listener is occupied.
+Ollama may already run as a Windows app/service. If `ollama serve` reports `address already in use`, that often means the API is **already running**; do not start a second copy. `qwen2.5-coder:7b` is an optional model alternative but is not required.
 
-### 2. Kali: start the SSH server
+### B. Kali — verify SSH server
 
 ```bash
 sudo systemctl enable --now ssh
@@ -87,19 +122,21 @@ sudo systemctl status ssh --no-pager
 sudo ss -lntp | grep ':22'
 ```
 
-If Kali runs in VirtualBox NAT mode, make sure a NAT port-forward exists from Windows `127.0.0.1:2222` to Kali SSH port 22. The VM's precise adapter and guest IP may differ. **Don't add a duplicate NAT forwarding rule.**
+If `openssh-server` is absent, install it using Kali's package manager **after resolving any existing dpkg errors**.
 
-Test from Windows PowerShell:
+### C. Windows — confirm host-to-guest SSH access
+
+If you already have VirtualBox NAT port forwarding mapping Windows loopback `2222` to Kali port `22`, test:
 
 ```powershell
 ssh -p 2222 kali@127.0.0.1
 ```
 
-If successful, run `exit` to return to Windows. `kali` is the example username; replace if different.
+After login, type `exit`. **Do not duplicate an existing port-forwarding rule.** If SSH access is unavailable, use VirtualBox's **Network > Adapter > Advanced > Port Forwarding** to create a rule: TCP, host IP `127.0.0.1`, host port `2222`, guest port `22`; configure guest IP to your actual Kali NAT address if required. This is specific to your VirtualBox network setup. Refer to [VirtualBox documentation](https://www.virtualbox.org/manual/ch06.html).
 
-### 3. Windows: leave the reverse tunnel open
+### D. Windows — open a persistent reverse SSH tunnel
 
-Open a separate Windows PowerShell window:
+In **a separate Windows PowerShell window**:
 
 ```powershell
 ssh -NT `
@@ -110,26 +147,26 @@ ssh -NT `
   kali@127.0.0.1
 ```
 
-After entering the Kali password, a silent SSH window is normal. Keep it open for the scanner session.
+Enter the Kali account password. **No output is normal. Leave this terminal open** during AI scans. The tunnel is broken when this SSH process exits.
 
-### 4. Kali: verify the AI endpoint
+### E. Kali — prove real model inference works
 
 ```bash
 curl -fsS http://127.0.0.1:11437/api/tags | python3 -m json.tool
-
-curl --connect-timeout 10 --max-time 180 -sS \
+curl --connect-timeout 10 --max-time 180 -fsS \
   http://127.0.0.1:11437/api/generate \
   -H 'Content-Type: application/json' \
-  -d '{"model":"qwen3:8b","prompt":"Reply exactly: OWA CONNECTION OK","stream":false,"think":false,"options":{"num_predict":32}}'
+  -d '{"model":"qwen3:8b","prompt":"Reply with exactly: OWA CONNECTION OK","stream":false,"think":false,"options":{"num_predict":32}}' \
+  | python3 -m json.tool
 ```
 
-Ensure the response has `"done":true` and contains `OWA CONNECTION OK`. Initial model loading may take extra time.
+Expect a JSON response with `"done": true` and `"response": "OWA CONNECTION OK"` (or equivalent). The initial inference may need time to load the model.
 
-### 5. Kali: enable optional AI explanations in the scanner
+### F. Kali — run the auditor with optional AI explanations
+
+From the cloned repository virtual environment, with your localhost demo server still running:
 
 ```bash
-source .venv/bin/activate
-
 export OWA_AI_PROVIDER=ollama
 export OWA_AI_ENDPOINT=http://127.0.0.1:11437
 export OWA_AI_MODEL=qwen3:8b
@@ -137,96 +174,119 @@ export OWA_AI_MODEL=qwen3:8b
 python -m auditor \
   --url http://127.0.0.1:8765 \
   --no-crawl \
-  --output runs/windows-ollama-demo \
+  --output runs/ollama-demo \
   --ai-provider ollama \
   --ai-endpoint http://127.0.0.1:11437 \
   --ai-model qwen3:8b
 ```
 
-Look for `AI report: complete` in the CLI output. AI service unavailability must never be interpreted as a changed deterministic verdict.
+The CLI may print `AI explanation ...` and `AI report: complete`; `results/ai.json` records model/provider status. **AI failure does not change deterministic CHK findings.** Never use AI output as evidence or a final security verdict.
 
-### Common AI troubleshooting
+**Alternative: Ollama running on Kali** (no tunnel): use `http://127.0.0.1:11434` instead. More provider details: [`docs/automatic-ai.md`](docs/automatic-ai.md).
 
-| Symptom | Check |
-|---|---|
-| Windows `ollama serve` says port in use | Ollama likely already running; check `/api/tags`. |
-| Kali `/api/tags` connection refused | SSH reverse tunnel has stopped or port is wrong. |
-| SSH `-p 2222` refused | VirtualBox NAT forward, Kali `sshd`, and username. |
-| Model request slow | Windows `ollama ps`, available RAM, and first model load. |
-| Scan succeeds but AI unavailable | Keep deterministic report; check model name, port and tunnel. |
+### Windows–Kali AI troubleshooting
 
-**Privacy:** Only send authorized test material to local Ollama. Avoid feeding real credentials, tokens or private user data into prompts or publishing raw reports.
+| Problem | What to check |
+| --- | --- |
+| Windows Ollama port already bound | `Invoke-RestMethod http://127.0.0.1:11434/api/tags`; do not start another `ollama serve` |
+| `ssh -p 2222` fails | Kali SSH service and VirtualBox NAT port forwarding, account name and port |
+| Kali `11437` connection refused | Keep `ssh -NT -R ...` open; check `curl /api/tags` first |
+| `/api/tags` works, AI response is slow | Initial model loading; `ollama ps` on Windows; allow time for first inference |
+| Scanner reports AI unavailable | Verify environment variables, model name, endpoint and tunnel; deterministic report remains usable |
+| Security report flagged issues on localhost | A demo Python HTTP server lacks some expected policies; `Potential` is not confirmed exploitation |
 
-## Authenticated RBAC assessment
+## 4. Authenticated AuditShop lab (optional, advanced)
 
-Authenticated checks are **opt-in**. They require a dedicated first-party lab, a deliberately approved policy and the exact supported project adapter.
+CHK09–CHK13 are for an **explicitly approved AuditShop-compatible local environment**, not arbitrary websites. The example JSON files refer to `http://127.0.0.1:8088`. They do **not** start the application for you. Use only your own isolated lab, preferably a disposable dataset.
+
+Start with offline validation:
 
 ```bash
-cat config/rbac.policy.example.json
-cat config/auditshop.rbac.project.example.json
-python -m auditor --rbac-policy config/rbac.policy.example.json --help
-python tools/phase5_rbac_e2e.py
+python -m auditor \
+  --project config/auditshop.rbac.project.example.json \
+  --validate-project
 ```
 
-Do not turn `authorized_for_testing` on for a target without actual permission. Only use controlled credentials/environment variables for test accounts; never commit live passwords.
-
-## Reporting, integrity and privacy
-
-After a scan, open the report path printed by the CLI. The working run directory contains structured JSON data, request ledger and evidence artifacts.
-
-Optional Phase 6 hardening commands (from the source checkout):
+For live preflight, define account email/password variables **only in your local shell, never in Git**:
 
 ```bash
-RUN=/path/to/a/completed/scan-directory
+export AUDITSHOP_A_EMAIL='YOUR_LAB_CUSTOMER_A_EMAIL'
+export AUDITSHOP_A_PASSWORD='YOUR_LAB_CUSTOMER_A_PASSWORD'
+export AUDITSHOP_B_EMAIL='YOUR_LAB_CUSTOMER_B_EMAIL'
+export AUDITSHOP_B_PASSWORD='YOUR_LAB_CUSTOMER_B_PASSWORD'
+export AUDITSHOP_ADMIN_EMAIL='YOUR_LAB_ADMIN_EMAIL'
+export AUDITSHOP_ADMIN_PASSWORD='YOUR_LAB_ADMIN_PASSWORD'
+
+python -m auditor \
+  --project config/auditshop.rbac.project.example.json \
+  --check-accounts
+```
+
+To enable CHK13, **create a local, human-approved copy** of `config/rbac.policy.example.json` with your actual reviewer, approval reference, authorized test scope and `authorized_for_testing=true`. Do not commit that approved local policy or credentials. Run the authenticated assessment only after preflight succeeds:
+
+```bash
+python -m auditor \
+  --project config/auditshop.rbac.project.example.json \
+  --rbac-policy /path/to/your-approved-local-policy.json \
+  --assess \
+  --output runs/authorized-lab
+```
+
+Read [`docs/authenticated-assessment.md`](docs/authenticated-assessment.md), [`docs/phase5-rbac.md`](docs/phase5-rbac.md) and [`docs/phase5-authenticated-e2e.md`](docs/phase5-authenticated-e2e.md) first. These checks can exercise authentication and data-access paths; only run them under written authorization.
+
+## 5. Offline evidence integrity and privacy export
+
+For a completed run, use its **actual** printed directory:
+
+```bash
+RUN='runs/ollama-demo/scan-ACTUAL_ID'
 python tools/phase6_hardening.py --run "$RUN" --snapshot
 python tools/phase6_hardening.py --run "$RUN" --verify
-python tools/phase6_hardening.py --run "$RUN" --export-private ./redacted-report.html
+python tools/phase6_hardening.py --run "$RUN" \
+  --export-private "$RUN/reports/report-private.html"
 ```
 
-Redaction is best effort; manually review HTML before sharing. A SHA-256 snapshot verifies later consistency, not provenance before the snapshot.
+SHA-256 manifests establish that files are unchanged **relative to your own snapshot**; they are not cryptographic proof that the original scan was genuine. Privacy redaction is **best-effort**; manually inspect any report before sharing. Raw evidence and run directories must remain private.
 
-## Research validation and limitations
+## 6. Benchmark evaluation and reproducibility
 
-- Rules and benchmark ground truth are human/source-authored, **never AI-generated**.
-- First-party synthetic lab tests are not an independent benchmark.
-- Two real OWASP Benchmark Java 1.2 CHK04 detector observations were collected via a compatibility adapter: `BenchmarkTest00016` → `No Issue Observed`, `BenchmarkTest00087` POST → `Potential`.
-- Human approval was still `PENDING`; the benchmark score showed **2 pending, 13 unexecuted**, not real TP/TN.
-- `Potential` must be scored as **abstention**, not confirmed detection, after proper review.
-- Existing CHK11 authenticated SQLi adapter is AuditShop-specific and not automatically applicable to Benchmark Java endpoints.
-- The full scanner CLI was not used for that particular external CHK04 adapter experiment.
-- No independently established overall precision, recall, accuracy or false-positive rate is claimed.
+The repository contains source provenance, human-review gates, and CHK04 adapter tooling. The external OWASP Benchmark Java fixture is **not executed during normal scanning**. Do not claim benchmark accuracy unless labels, endpoint compatibility, raw evidence, detector replay, and human attestations have all been verified. The 15-case subset has 13 unexecuted cases; two CHK04 observations were pending human review at RC1.
 
-Relevant reproducibility tools:
+- [`docs/phase7-independent-evaluation.md`](docs/phase7-independent-evaluation.md)
+- [`docs/phase7-2-benchmark-chk04.md`](docs/phase7-2-benchmark-chk04.md)
+- [`docs/phase7-3-review.md`](docs/phase7-3-review.md)
+
+## 7. Run tests, build a release and verify a clean clone
 
 ```bash
-python tools/phase7_evaluation.py prepare
-python tools/phase7_evaluation.py verify
-python tools/phase7_evaluation.py score
-python tools/phase7_2_chk04.py --help
-python tools/phase7_3_review.py --help
+python -m pytest -q
+python -m auditor.rules --validate
+python -m auditor --version
+python -m pip install build
+python -m build
+ls -lh dist/
 ```
 
-## Project layout
+For a clean install check, clone into a **new** directory and follow section 1. Before deleting any local files, confirm that the public repository includes `auditor/`, `config/`, `docs/`, `lab/`, `research/`, `tests/`, `tools/`, `pyproject.toml`, `README.md`, and `.github/workflows/ci.yml`; that `pytest` passes; and that a local demo scan succeeds. **Back up private lab data, credentials, uncommitted changes and scan evidence separately**: these are deliberately not in Git.
+
+## Repository layout
 
 ```text
-auditor/    Python CLI, rules, scanning, auth, reporting, AI and evidence validation
-config/     Example project configuration and approved-policy templates
-docs/       Research, setup, usage and architecture documentation
-lab/        Controlled local servers for validation
-research/   Source mappings, benchmark labels, evaluation evidence and results
-tests/      Unit, regression and localhost integration tests
-tools/      Benchmark, research, provenance, review and hardening utilities
-.github/    GitHub Actions CI
+auditor/       CLI entrypoints, deterministic checks, authenticated adapter,
+               HTTP transport, crawler, AI integration, reporting, rules, integrity
+config/        Example public profile and AuditShop lab configs
+lab/           First-party localhost fixture servers
+research/      Research traceability, benchmark metadata and score baselines
+tests/         Automated checks, regression, adversarial and E2E tests
+tools/         Evidence integrity, research mapping and evaluation CLIs
+docs/          Technical guides for every research/prototype milestone
+.github/       GitHub Actions CI configuration
+pyproject.toml Python package metadata, dependencies and entry points
 ```
 
-## Safety and licensing
+## Attribution, privacy, license and contact
 
-The repository is independently developed and uses "OWASP" to describe its security-research context, **not** to imply OWASP sponsorship. No public license is assigned until code ownership and bundled third-party terms are reviewed; absence of a license generally means standard copyright rules apply. Check dependencies, original research datasets, and any borrowed code before selecting a license.
-
-Do not commit `.env`, `.venv/`, `runs/`, real session cookies, raw authorization headers, credentials, user private evidence, or exported customer data.
-
-## Release
-
-Current release candidate: `0.2.0rc1`. Final Kali checks previously passed **232 tests, 41 subtests**, 13 schema-valid check records and successful wheel/sdist builds. Re-run tests after a clean clone because documentation and packaging can change.
-
-This is a **completed research prototype**, with transparent benchmark limitations—not a security certification.
+- This is an **independent** research prototype and is not affiliated with or endorsed by the OWASP Foundation.
+- Original external benchmark sources and other datasets retain their own terms. Review [`research/`](research/) and citations before redistribution.
+- **License decision pending:** No open-source license has been selected in this source archive. Public GitHub visibility **does not automatically grant permission to reuse or redistribute this code**. The repository owner should explicitly select a license after reviewing ownership and third-party material.
+- Never commit `.env`, passwords, API keys, raw scan evidence, approved private RBAC policies or personal datasets. The `.gitignore` helps but is not a security substitute for reviewing every commit.

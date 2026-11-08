@@ -1,0 +1,39 @@
+# Python and editor output
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
+
+# Secrets and local environment
+.env
+.env.*
+!*.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.local.json
+*policy.approved*.json
+
+# Generated scanner output, reports and evidence
+runs/
+scan-*/
+report-private.html
+*.log
+
+# Downloaded / local research assets and review attestations
+research/datasets/external/
+research/phase7_2/live*/
+research/phase7_3/live*/
+research/phase7/live/
