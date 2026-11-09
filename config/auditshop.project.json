@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "base_url": "http://127.0.0.1:8088",
+  "auth_adapter": "auditshop-json-v1",
+  "accounts": [
+    {"alias": "customer_a", "username_env": "AUDITSHOP_A_EMAIL", "password_env": "AUDITSHOP_A_PASSWORD", "expected_id": 101, "expected_role": "customer"},
+    {"alias": "customer_b", "username_env": "AUDITSHOP_B_EMAIL", "password_env": "AUDITSHOP_B_PASSWORD", "expected_id": 102, "expected_role": "customer"}
+  ]
+}

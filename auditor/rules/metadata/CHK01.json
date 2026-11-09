@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK01",
+  "title": "HTTP root HTTPS redirect handling",
+  "execution_mode": "http_redirect",
+  "implementation": "auditor.checks.https_handling",
+  "owasp_top10_2025_category": "A04:2025",
+  "scope": "Supplied HTTP root and its permitted redirect chain.",
+  "prerequisites": "HTTP root URL and successful bounded retrieval.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V4.1.2"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": [
+        "CWE-319"
+      ]
+    },
+    "relationship": "related",
+    "limitations": "Not TLS assessment and not sufficient proof of cleartext sensitive transmission",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

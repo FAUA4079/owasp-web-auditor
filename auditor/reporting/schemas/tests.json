@@ -1,0 +1,85 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "rule_id": {
+        "type": "string"
+      },
+      "rule_version": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "expected": {
+        "type": "string"
+      },
+      "endpoint": {
+        "type": "string"
+      },
+      "status": {
+        "enum": [
+          "Confirmed",
+          "Potential",
+          "Inconclusive",
+          "No Issue Observed",
+          "Not Tested"
+        ]
+      },
+      "steps": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "limitations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "evidence_refs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "request_count": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "observed": {
+        "type": [
+          "object",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "rule_id",
+      "rule_version",
+      "category",
+      "title",
+      "status",
+      "reason",
+      "steps",
+      "expected",
+      "limitations",
+      "evidence_refs",
+      "request_count"
+    ],
+    "additionalProperties": true
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

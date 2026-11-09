@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK08",
+  "title": "Exceptional numeric input handling",
+  "execution_mode": "explicit_query_probe",
+  "implementation": "auditor.checks.exceptional_input",
+  "owasp_top10_2025_category": "A10:2025",
+  "scope": "One numeric baseline and one malformed query value.",
+  "prerequisites": "Explicit numeric read-only parameter and valid baseline.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V2.2.1"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": []
+    },
+    "relationship": "related",
+    "limitations": "Server error not inherently a vulnerability; CWE intentionally unmapped",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

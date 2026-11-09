@@ -1,0 +1,98 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "finished",
+        "partial"
+      ]
+    },
+    "request_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "ended_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stop_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "resumable": {
+      "type": "boolean"
+    },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "started_at": {
+            "type": "string"
+          },
+          "ended_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "started_at",
+          "ended_at"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "selected_checks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "CHK01",
+          "CHK02",
+          "CHK03",
+          "CHK04",
+          "CHK05",
+          "CHK06",
+          "CHK07",
+          "CHK08"
+        ]
+      }
+    },
+    "crawl_enabled": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "tool_version",
+    "status",
+    "request_count",
+    "started_at",
+    "ended_at"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

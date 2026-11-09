@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "framework": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "limitations": {
+            "type": "string"
+          },
+          "additional_evidence_needed": {
+            "type": "string"
+          },
+          "coverage": {
+            "enum": [
+              "Not Tested",
+              "Partially Assessed"
+            ]
+          },
+          "attempted_rules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skipped_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_result_rules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "category",
+          "name",
+          "limitations",
+          "additional_evidence_needed",
+          "coverage",
+          "attempted_rules",
+          "skipped_reasons",
+          "missing_result_rules"
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [
+    "framework",
+    "note",
+    "categories"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

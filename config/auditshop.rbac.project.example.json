@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "base_url": "http://127.0.0.1:8088",
+  "auth_adapter": "auditshop-json-v1",
+  "accounts": [
+    {
+      "alias": "customer_a",
+      "username_env": "AUDITSHOP_A_EMAIL",
+      "password_env": "AUDITSHOP_A_PASSWORD",
+      "expected_id": 101,
+      "expected_role": "customer"
+    },
+    {
+      "alias": "customer_b",
+      "username_env": "AUDITSHOP_B_EMAIL",
+      "password_env": "AUDITSHOP_B_PASSWORD",
+      "expected_id": 102,
+      "expected_role": "customer"
+    },
+    {
+      "alias": "admin",
+      "username_env": "AUDITSHOP_ADMIN_EMAIL",
+      "password_env": "AUDITSHOP_ADMIN_PASSWORD",
+      "expected_id": 103,
+      "expected_role": "admin"
+    }
+  ],
+  "assessment": {
+    "order_resources": [
+      {
+        "order_id": 1001,
+        "owner": "customer_a",
+        "other": "customer_b"
+      },
+      {
+        "order_id": 1002,
+        "owner": "customer_b",
+        "other": "customer_a"
+      }
+    ]
+  }
+}

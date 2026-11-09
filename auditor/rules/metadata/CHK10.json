@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK10",
+  "title": "Anonymous private order access",
+  "execution_mode": "auditshop_authenticated",
+  "implementation": "auditor.auth.checks",
+  "owasp_top10_2025_category": "A01:2025",
+  "scope": "Anonymous access to declared private orders.",
+  "prerequisites": "Verified owner control and declared private resource.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V8.2.1",
+        "V8.2.2"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": [
+        "CWE-862"
+      ]
+    },
+    "relationship": "direct_lab_specific",
+    "limitations": "Public resources are not vulnerabilities; owner/private status must be verified",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

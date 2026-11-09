@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK13",
+  "title": "Role-based authorization",
+  "execution_mode": "auditshop_authenticated",
+  "implementation": "auditor.auth.rbac",
+  "owasp_top10_2025_category": "A01:2025",
+  "scope": "Explicit /api/rbac/<slug> resource for two verified roles under operator-approved access policy.",
+  "prerequisites": "Explicit --rbac-policy with two verified account roles and lab resource marker.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V8.1.1",
+        "V8.2.1",
+        "V8.2.2"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": [
+        "CWE-862"
+      ]
+    },
+    "relationship": "direct_lab_specific",
+    "limitations": "Policy supplied and reviewed by operator; no general-purpose endpoint discovery",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

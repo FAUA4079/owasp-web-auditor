@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "base_url": "http://127.0.0.1:8088",
+  "authorization": {
+    "approved_by": "REPLACE_WITH_REVIEWER",
+    "approval_reference": "REPLACE_WITH_APPROVAL_TICKET",
+    "authorized_for_testing": false
+  },
+  "cases": [
+    {
+      "resource_id": "staff-report",
+      "allow": "admin",
+      "deny": "customer_a"
+    }
+  ]
+}

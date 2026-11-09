@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK04",
+  "title": "Cookie attribute observations",
+  "execution_mode": "response_inspection",
+  "implementation": "auditor.checks.cookies",
+  "owasp_top10_2025_category": "A02:2025",
+  "scope": "Supported attributes in final-response Set-Cookie fields.",
+  "prerequisites": "A complete response containing Set-Cookie.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V3.3.1",
+        "V3.3.2",
+        "V3.3.4"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": [
+        "CWE-614",
+        "CWE-1004"
+      ]
+    },
+    "relationship": "partial",
+    "limitations": "Cookie sensitivity and intended context require application policy",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

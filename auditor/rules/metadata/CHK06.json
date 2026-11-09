@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK06",
+  "title": "Directory listing indicators",
+  "execution_mode": "response_inspection",
+  "implementation": "auditor.checks.directory_listing",
+  "owasp_top10_2025_category": "A02:2025",
+  "scope": "Common directory-listing structures at fetched directories.",
+  "prerequisites": "Successful HTML response at a trailing-slash URL.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": []
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": [
+        "CWE-548"
+      ]
+    },
+    "relationship": "related",
+    "limitations": "No ASVS requirement assigned; listing of public files may be intended",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

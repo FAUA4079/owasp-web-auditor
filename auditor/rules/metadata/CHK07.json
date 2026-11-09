@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK07",
+  "title": "Harmless query marker reflection",
+  "execution_mode": "explicit_query_probe",
+  "implementation": "auditor.checks.reflection",
+  "owasp_top10_2025_category": "A05:2025",
+  "scope": "Exact harmless-marker reflection in one selected parameter.",
+  "prerequisites": "Explicit read-only parameter and comparable responses.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V1.2.1"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": []
+    },
+    "relationship": "preliminary",
+    "limitations": "Never label confirmed XSS; CWE intentionally unmapped",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}

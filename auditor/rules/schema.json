@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "execution_mode",
+    "implementation",
+    "owasp_top10_2025_category",
+    "scope",
+    "prerequisites",
+    "research",
+    "validation",
+    "safety"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "pattern": "^CHK(0[1-9]|1[0-3])$",
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_mode": {
+      "enum": [
+        "http_redirect",
+        "response_inspection",
+        "explicit_query_probe",
+        "auditshop_authenticated"
+      ]
+    },
+    "implementation": {
+      "type": "string",
+      "pattern": "^auditor\\.[a-z_.]+$"
+    },
+    "owasp_top10_2025_category": {
+      "type": "string",
+      "pattern": "^A(0[1-9]|10):2025$"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prerequisites": {
+      "type": "string",
+      "minLength": 1
+    },
+    "research": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asvs",
+        "cwe",
+        "relationship",
+        "limitations",
+        "traceability_file"
+      ],
+      "properties": {
+        "asvs": {
+          "$ref": "#/$defs/asvs"
+        },
+        "cwe": {
+          "$ref": "#/$defs/cwe"
+        },
+        "relationship": {
+          "enum": [
+            "direct",
+            "partial",
+            "related",
+            "preliminary",
+            "direct_lab_specific",
+            "related_lab_specific"
+          ]
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceability_file": {
+          "const": "research/phase2_exact_mapping.csv"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_specification",
+        "ground_truth_status"
+      ],
+      "properties": {
+        "fixture_specification": {
+          "const": "research/fixtures/case_specifications.json"
+        },
+        "ground_truth_status": {
+          "const": "UNEXECUTED_SPECIFICATIONS"
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requires_operator_authorization",
+        "executes_code_from_metadata",
+        "read_only_probe"
+      ],
+      "properties": {
+        "requires_operator_authorization": {
+          "const": true
+        },
+        "executes_code_from_metadata": {
+          "const": false
+        },
+        "read_only_probe": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "asvs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "requirement_ids"
+      ],
+      "properties": {
+        "version": {
+          "const": "5.0.0"
+        },
+        "requirement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^V[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        }
+      }
+    },
+    "cwe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "weakness_ids"
+      ],
+      "properties": {
+        "version": {
+          "const": "5.0"
+        },
+        "weakness_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^CWE-[0-9]+$"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "id": "CHK03",
+  "title": "Content type protection configuration",
+  "execution_mode": "response_inspection",
+  "implementation": "auditor.checks.headers",
+  "owasp_top10_2025_category": "A02:2025",
+  "scope": "Content-Type and nosniff observations on fetched responses.",
+  "prerequisites": "A complete response with accessible headers.",
+  "research": {
+    "asvs": {
+      "version": "5.0.0",
+      "requirement_ids": [
+        "V3.4.4"
+      ]
+    },
+    "cwe": {
+      "version": "5.0",
+      "weakness_ids": []
+    },
+    "relationship": "partial",
+    "limitations": "MIME validity and browser handling not evaluated; CWE intentionally unmapped",
+    "traceability_file": "research/phase2_exact_mapping.csv"
+  },
+  "validation": {
+    "fixture_specification": "research/fixtures/case_specifications.json",
+    "ground_truth_status": "UNEXECUTED_SPECIFICATIONS"
+  },
+  "safety": {
+    "requires_operator_authorization": true,
+    "executes_code_from_metadata": false,
+    "read_only_probe": true
+  }
+}
