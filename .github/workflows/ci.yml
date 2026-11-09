@@ -1,0 +1,38 @@
+name: CI — OWASP Web Auditor research prototype
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install package and tests
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest
+      - name: Static package validation
+        run: |
+          python -m compileall -q auditor tools
+          python -m auditor.rules --validate
+          python -m auditor --list-checks
+      - name: Run all regression tests (includes localhost fixtures)
+        run: python -m pytest -q
+      - name: Build wheel and sdist
+        if: matrix.python-version == '3.13'
+        run: |
+          python -m pip install build
+          python -m build
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          python -m auditor --version
