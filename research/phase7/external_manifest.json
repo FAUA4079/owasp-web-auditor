@@ -1,0 +1,327 @@
+{
+  "applicability": [
+    {
+      "asvs_ids": [
+        "V4.1.2"
+      ],
+      "case_count": 0,
+      "check_id": "CHK01",
+      "cwe_ids": [
+        "CWE-319"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V3.4.6"
+      ],
+      "case_count": 0,
+      "check_id": "CHK02",
+      "cwe_ids": [
+        "CWE-1021"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V3.4.4"
+      ],
+      "case_count": 0,
+      "check_id": "CHK03",
+      "cwe_ids": [],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V3.3.1",
+        "V3.3.2",
+        "V3.3.4"
+      ],
+      "case_count": 8,
+      "check_id": "CHK04",
+      "cwe_ids": [
+        "CWE-614",
+        "CWE-1004"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [
+        "BenchmarkTest00016",
+        "BenchmarkTest00087",
+        "BenchmarkTest00088",
+        "BenchmarkTest00169",
+        "BenchmarkTest00170",
+        "BenchmarkTest00655",
+        "BenchmarkTest00903",
+        "BenchmarkTest00904"
+      ],
+      "suitability": "CWE-level candidate, requires independent endpoint and detector compatibility review"
+    },
+    {
+      "asvs_ids": [],
+      "case_count": 0,
+      "check_id": "CHK05",
+      "cwe_ids": [
+        "CWE-209"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [],
+      "case_count": 0,
+      "check_id": "CHK06",
+      "cwe_ids": [
+        "CWE-548"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V1.2.1"
+      ],
+      "case_count": 0,
+      "check_id": "CHK07",
+      "cwe_ids": [],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V2.2.1"
+      ],
+      "case_count": 0,
+      "check_id": "CHK08",
+      "cwe_ids": [],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V8.2.2"
+      ],
+      "case_count": 0,
+      "check_id": "CHK09",
+      "cwe_ids": [
+        "CWE-639"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V8.2.1",
+        "V8.2.2"
+      ],
+      "case_count": 0,
+      "check_id": "CHK10",
+      "cwe_ids": [
+        "CWE-862"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V1.2.4"
+      ],
+      "case_count": 7,
+      "check_id": "CHK11",
+      "cwe_ids": [
+        "CWE-89"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [
+        "BenchmarkTest00008",
+        "BenchmarkTest00018",
+        "BenchmarkTest00052",
+        "BenchmarkTest00100",
+        "BenchmarkTest00104",
+        "BenchmarkTest00105",
+        "BenchmarkTest00107"
+      ],
+      "suitability": "CWE-level candidate, requires independent endpoint and detector compatibility review"
+    },
+    {
+      "asvs_ids": [
+        "V7.4.1"
+      ],
+      "case_count": 0,
+      "check_id": "CHK12",
+      "cwe_ids": [
+        "CWE-613"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    },
+    {
+      "asvs_ids": [
+        "V8.1.1",
+        "V8.2.1",
+        "V8.2.2"
+      ],
+      "case_count": 0,
+      "check_id": "CHK13",
+      "cwe_ids": [
+        "CWE-862"
+      ],
+      "execution_status": "UNEXECUTED",
+      "external_cases": [],
+      "suitability": "No benchmark case selected for a directly compatible check"
+    }
+  ],
+  "dataset_name": "OWASP BenchmarkJava expectedresults-1.2.csv",
+  "full_original_file_bundled": false,
+  "labels": [
+    {
+      "case_id": "BenchmarkTest00008",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00016",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00018",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00052",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00087",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00088",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00100",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00104",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00105",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00107",
+      "category": "sqli",
+      "check_id": "CHK11",
+      "cwe": "CWE-89",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00169",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00170",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00655",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00903",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": true,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    },
+    {
+      "case_id": "BenchmarkTest00904",
+      "category": "securecookie",
+      "check_id": "CHK04",
+      "cwe": "CWE-614",
+      "expected_vulnerability": false,
+      "source": "OWASP Benchmark Java v1.2 author labels"
+    }
+  ],
+  "labels_count": 15,
+  "limitations": [
+    "No external benchmark application executed",
+    "CHK11 AuditShop SQL differential incompatible with BenchmarkJava servlet interface",
+    "CHK04 cookie attributes not a case-level CWE-614 finding without endpoint correlation",
+    "No signed human reviewer approval or independent duplicate label check",
+    "CWE matching alone does not establish detector applicability"
+  ],
+  "mapping_sha256": "58d12061a8b49aea733f59536ffc35531d8ee5fe12addab2c73d93912a157eaa",
+  "review_sheet_sha256": "76dddaa43169023708e23f9586bfb11a05235ee0d5c2231eca6b959fb667e591",
+  "review_status": "SOURCE_AUTHORED_NOT_INDEPENDENTLY_HUMAN_SIGNED_OFF",
+  "schema_version": 1,
+  "source_commit_pinned": false,
+  "source_release": "1.2",
+  "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/master/expectedresults-1.2.csv",
+  "subset_provenance": "Rows transcribed verbatim from upstream GitHub CSV; full source not vendored",
+  "subset_sha256": "c44bed9b89db9a01343427881e41d39a852740a675431cf8748455d12ea1e013"
+}

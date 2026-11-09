@@ -1,0 +1,111 @@
+{
+  "methodology": "Separate first-party local HTTP server via full CLI subprocess; not external dataset.",
+  "scope": "127.0.0.1 only; deterministic first-party holdout response configurations",
+  "claims": "Verified expected observable status; NOT real-world vulnerability accuracy.",
+  "test_cases": 5,
+  "assertions": 19,
+  "assertions_passed": 19,
+  "failed_assertions": 0,
+  "cases": [
+    {
+      "case": "hardened_html",
+      "ground_truth_type": "first_party_holdout_lab",
+      "expected_and_observed": {
+        "CHK02": "Inconclusive",
+        "CHK03": "No Issue Observed",
+        "CHK04": "No Issue Observed",
+        "CHK05": "No Issue Observed",
+        "CHK06": "No Issue Observed"
+      },
+      "all_assertions_passed": true,
+      "request_count": 1,
+      "test_count": 8,
+      "evidence_files": 4,
+      "tests_json_sha256": "b03b5ab1bc25199527d791f0241b0a15b6c2a9b03cba3a4ac76a4ea15097a51f",
+      "json_schema_valid": true,
+      "evidence_integrity_valid": true,
+      "tampering_detected": true,
+      "html_report_generated": true,
+      "ai_used_for_classification": false
+    },
+    {
+      "case": "missing_headers",
+      "ground_truth_type": "first_party_holdout_lab",
+      "expected_and_observed": {
+        "CHK02": "Potential",
+        "CHK03": "Potential",
+        "CHK04": "Potential",
+        "CHK05": "No Issue Observed",
+        "CHK06": "No Issue Observed"
+      },
+      "all_assertions_passed": true,
+      "request_count": 1,
+      "test_count": 8,
+      "evidence_files": 4,
+      "tests_json_sha256": "2c6da26609083a0c3097049b8e71a41d9662d5413915343bc916e3da6d91fdbc",
+      "json_schema_valid": true,
+      "evidence_integrity_valid": true,
+      "tampering_detected": true,
+      "html_report_generated": true,
+      "ai_used_for_classification": false
+    },
+    {
+      "case": "traceback_disclosure",
+      "ground_truth_type": "first_party_holdout_lab",
+      "expected_and_observed": {
+        "CHK02": "Not Tested",
+        "CHK03": "No Issue Observed",
+        "CHK05": "Potential",
+        "CHK06": "Not Tested"
+      },
+      "all_assertions_passed": true,
+      "request_count": 1,
+      "test_count": 8,
+      "evidence_files": 4,
+      "tests_json_sha256": "0e0d2d8bb2d2dd7cab6093b09d76297c91e096880b607cafff979627f27f7ad6",
+      "json_schema_valid": true,
+      "evidence_integrity_valid": true,
+      "tampering_detected": true,
+      "html_report_generated": true,
+      "ai_used_for_classification": false
+    },
+    {
+      "case": "directory_index",
+      "ground_truth_type": "first_party_holdout_lab",
+      "expected_and_observed": {
+        "CHK02": "Potential",
+        "CHK03": "No Issue Observed",
+        "CHK05": "No Issue Observed",
+        "CHK06": "Potential"
+      },
+      "all_assertions_passed": true,
+      "request_count": 1,
+      "test_count": 8,
+      "evidence_files": 4,
+      "tests_json_sha256": "4a14b3ecf86c65a4554d2f4bd5a865a19f7e64748f46e27415ab9668ed9b4ca5",
+      "json_schema_valid": true,
+      "evidence_integrity_valid": true,
+      "tampering_detected": true,
+      "html_report_generated": true,
+      "ai_used_for_classification": false
+    },
+    {
+      "case": "marker_reflection",
+      "ground_truth_type": "first_party_holdout_lab",
+      "expected_and_observed": {
+        "CHK07": "Potential"
+      },
+      "all_assertions_passed": true,
+      "request_count": 2,
+      "test_count": 8,
+      "evidence_files": 1,
+      "tests_json_sha256": "c44ad7fd58f1337a062ff14aa9491ec7880c73fef993f5e7a5875aa97386c775",
+      "json_schema_valid": true,
+      "evidence_integrity_valid": true,
+      "tampering_detected": true,
+      "html_report_generated": true,
+      "ai_used_for_classification": false
+    }
+  ],
+  "third_party_dataset_cases": 0
+}

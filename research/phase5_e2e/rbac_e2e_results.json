@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "methodology": "First-party localhost HTTP server; full authenticated CLI subprocess",
+  "ground_truth_origin": "Human-authored explicit lab scenario labels",
+  "independent_third_party_cases": 0,
+  "ai_generated_rules_or_ground_truth": false,
+  "results": [
+    {
+      "scenario": "secure",
+      "expected": "No Issue Observed",
+      "observed": "No Issue Observed",
+      "true_network_requests": 40,
+      "request_ledger_count": 40,
+      "account_identities_verified": 3,
+      "json_schema_valid": true,
+      "html_report_generated": true,
+      "integrity_passed": true,
+      "tamper_detected": true,
+      "unapproved_policy_blocked_pre_network": true,
+      "ai_used_for_verdict": false,
+      "evidence_count": 9,
+      "policy_sha256": "234c64a465e3eedaf903a41470ebf8ae275f447f01581a33f0748e7198e2381c"
+    },
+    {
+      "scenario": "vulnerable",
+      "expected": "Confirmed",
+      "observed": "Confirmed",
+      "true_network_requests": 40,
+      "request_ledger_count": 40,
+      "account_identities_verified": 3,
+      "json_schema_valid": true,
+      "html_report_generated": true,
+      "integrity_passed": true,
+      "tamper_detected": true,
+      "unapproved_policy_blocked_pre_network": true,
+      "ai_used_for_verdict": false,
+      "evidence_count": 9,
+      "policy_sha256": "2282bc1b44c39374963aa8cd669ef85e8ebda5154a075ff4f1221b117426a15d"
+    },
+    {
+      "scenario": "ambiguous",
+      "expected": "Inconclusive",
+      "observed": "Inconclusive",
+      "true_network_requests": 40,
+      "request_ledger_count": 40,
+      "account_identities_verified": 3,
+      "json_schema_valid": true,
+      "html_report_generated": true,
+      "integrity_passed": true,
+      "tamper_detected": true,
+      "unapproved_policy_blocked_pre_network": true,
+      "ai_used_for_verdict": false,
+      "evidence_count": 9,
+      "policy_sha256": "36941fcee1f1fbf9bfb25634f5e493f1214325ba02ea4303819acea1c1360e08"
+    }
+  ],
+  "passed": 3,
+  "total": 3,
+  "limitations": [
+    "Fixtures are purpose-built for this adapter, not an independent benchmark",
+    "Authentication/roles provided by lab, not external identity provider",
+    "Exact response matches only; no general real-world accuracy claim"
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "status": "UNEXECUTED_SPECIFICATIONS",
+  "policy": "Labels represent expected behavior under stated controlled fixtures, not observed vulnerabilities or measured scanner accuracy. No AI-generated dataset samples.",
+  "rules": [
+    {
+      "chk_id": "CHK01",
+      "source_mapping": {
+        "ASVS": [
+          "V4.1.2"
+        ],
+        "CWE": [
+          "CWE-319"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK01-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Root HTTP URL that reaches HTTPS",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK01-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Root HTTP URL that remains HTTP",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Not TLS assessment and not sufficient proof of cleartext sensitive transmission"
+    },
+    {
+      "chk_id": "CHK02",
+      "source_mapping": {
+        "ASVS": [
+          "V3.4.6"
+        ],
+        "CWE": [
+          "CWE-1021"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK02-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "HTML response with enforced CSP frame-ancestors",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK02-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "HTML response with neither recognized XFO nor frame-ancestors",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Actual frame embedding and policy effectiveness not evaluated"
+    },
+    {
+      "chk_id": "CHK03",
+      "source_mapping": {
+        "ASVS": [
+          "V3.4.4"
+        ],
+        "CWE": []
+      },
+      "cases": [
+        {
+          "id": "CHK03-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Response with Content-Type and single nosniff",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK03-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Missing nosniff or Content-Type",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "MIME validity and browser handling not evaluated; CWE intentionally unmapped"
+    },
+    {
+      "chk_id": "CHK04",
+      "source_mapping": {
+        "ASVS": [
+          "V3.3.1",
+          "V3.3.2",
+          "V3.3.4"
+        ],
+        "CWE": [
+          "CWE-614",
+          "CWE-1004"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK04-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Sensitive cookie with appropriate protection",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK04-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Sensitive cookie missing required flags",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Cookie sensitivity and intended context require application policy"
+    },
+    {
+      "chk_id": "CHK05",
+      "source_mapping": {
+        "ASVS": [],
+        "CWE": [
+          "CWE-209"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK05-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Benign page without supported error patterns",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK05-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Page with supported redacted traceback indicators",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "No ASVS requirement assigned without exact source fit"
+    },
+    {
+      "chk_id": "CHK06",
+      "source_mapping": {
+        "ASVS": [],
+        "CWE": [
+          "CWE-548"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK06-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Normal directory page without index indicators",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK06-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Known index-of listing response",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "No ASVS requirement assigned; listing of public files may be intended"
+    },
+    {
+      "chk_id": "CHK07",
+      "source_mapping": {
+        "ASVS": [
+          "V1.2.1"
+        ],
+        "CWE": []
+      },
+      "cases": [
+        {
+          "id": "CHK07-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Marker not reflected or safely encoded",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK07-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Raw marker reflected in target response",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Never label confirmed XSS; CWE intentionally unmapped"
+    },
+    {
+      "chk_id": "CHK08",
+      "source_mapping": {
+        "ASVS": [
+          "V2.2.1"
+        ],
+        "CWE": []
+      },
+      "cases": [
+        {
+          "id": "CHK08-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Valid numeric baseline and safe invalid-input rejection",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK08-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Invalid value produces server error or new error marker",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Server error not inherently a vulnerability; CWE intentionally unmapped"
+    },
+    {
+      "chk_id": "CHK09",
+      "source_mapping": {
+        "ASVS": [
+          "V8.2.2"
+        ],
+        "CWE": [
+          "CWE-639"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK09-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Nonowner is denied while owner can read",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK09-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Nonowner accesses another user private order",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Only authorized two-account fixture with confirmed order ownership"
+    },
+    {
+      "chk_id": "CHK10",
+      "source_mapping": {
+        "ASVS": [
+          "V8.2.1",
+          "V8.2.2"
+        ],
+        "CWE": [
+          "CWE-862"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK10-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Guest denied while owner reads",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK10-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Guest reads a private order",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Public resources are not vulnerabilities; owner/private status must be verified"
+    },
+    {
+      "chk_id": "CHK11",
+      "source_mapping": {
+        "ASVS": [
+          "V1.2.4"
+        ],
+        "CWE": [
+          "CWE-89"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK11-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Matched true/false probes behave identically on secure fixture",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK11-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Controlled vulnerable fixture has reproducible differential",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Differential by itself does not prove SQL injection; independent verification required"
+    },
+    {
+      "chk_id": "CHK12",
+      "source_mapping": {
+        "ASVS": [
+          "V7.4.1"
+        ],
+        "CWE": [
+          "CWE-613"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK12-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Authenticated before logout and rejected with same cookie after",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK12-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Old session cookie remains accepted after acknowledged logout",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Only the session artifact used; no cross-device token revocation claim"
+    },
+    {
+      "chk_id": "CHK13",
+      "source_mapping": {
+        "ASVS": [
+          "V8.1.1",
+          "V8.2.1",
+          "V8.2.2"
+        ],
+        "CWE": [
+          "CWE-862"
+        ]
+      },
+      "cases": [
+        {
+          "id": "CHK13-SECURE-01",
+          "expected_label": "negative",
+          "scenario": "Declared denied role receives 403 while allowed role has stable private resource identity",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        },
+        {
+          "id": "CHK13-INSECURE-01",
+          "expected_label": "positive_candidate",
+          "scenario": "Declared denied role receives same resource marker and identifier despite policy",
+          "fixture_status": "SPECIFICATION_ONLY",
+          "evidence_collected": false,
+          "approved_target_required": true
+        }
+      ],
+      "limitation": "Lab adapter only; authorized owner-supplied role policy; no arbitrary URL scanner."
+    }
+  ]
+}

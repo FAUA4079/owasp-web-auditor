@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0",
+  "as_of": "2026-11-08",
+  "policy": "No generated source records. Source URLs and scenario descriptions manually reviewed against official pages. Official source files are not bundled or claimed downloaded. Exact ASVS/CWE requirement mappings deliberately blank pending source extraction.",
+  "sources": [
+    {
+      "key": "WSTG",
+      "version": "4.2",
+      "publisher": "OWASP",
+      "landing_url": "https://wstg.owasp.org/v4.2/",
+      "format": "versioned web guide",
+      "status": "official_version_verified; individual scenario links partially reviewed",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "key": "ASVS",
+      "version": "5.0.0",
+      "publisher": "OWASP",
+      "landing_url": "https://asvs.owasp.org/downloads/",
+      "dataset_url": "https://github.com/OWASP/ASVS/raw/v5.0.0/5.0/docs_en/OWASP_Application_Security_Verification_Standard_5.0.0_en.csv",
+      "format": "CSV",
+      "status": "official_release_and_download_link_verified; bytes_not_downloaded",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "key": "CWE",
+      "version": "5.0",
+      "publisher": "MITRE",
+      "landing_url": "https://cwe.mitre.org/data/downloads",
+      "format": "official CSV/XML archive",
+      "status": "official_version_verified; concrete asset not downloaded",
+      "license": "see official MITRE CWE terms"
+    },
+    {
+      "key": "TOP10",
+      "version": "2025",
+      "publisher": "OWASP",
+      "landing_url": "https://top10.owasp.org/2025/",
+      "format": "web risk taxonomy",
+      "status": "official_version_verified; mapping copied from existing project",
+      "license": "see project terms"
+    }
+  ],
+  "imports": []
+}

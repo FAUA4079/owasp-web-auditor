@@ -1,0 +1,55 @@
+{
+  "methodology": "First-party AuditShop MockTransport controlled roles. Not independent real-world ground truth.",
+  "generated_utc": "2026-11-08T08:17:30.893243+00:00",
+  "research": {
+    "asvs_version": "5.0.0",
+    "asvs_requirement_ids": [
+      "V8.1.1",
+      "V8.2.1",
+      "V8.2.2"
+    ],
+    "cwe_version": "5.0",
+    "cwe_id": "CWE-862"
+  },
+  "policy_sha256": "4c567c133b3925e4c5dd6dc2717e2a706f86967d1d83f4483d4be010220844fe",
+  "cases": [
+    {
+      "scenario": "fixed",
+      "expected": "No Issue Observed",
+      "observed": "No Issue Observed",
+      "correct": true,
+      "request_count_for_chk13": 3,
+      "checked_identity_match": false,
+      "evidence_validated": true,
+      "lab_requests": 34
+    },
+    {
+      "scenario": "rbac_bypass",
+      "expected": "Confirmed",
+      "observed": "Confirmed",
+      "correct": true,
+      "request_count_for_chk13": 3,
+      "checked_identity_match": true,
+      "evidence_validated": true,
+      "lab_requests": 34
+    },
+    {
+      "scenario": "misleading200",
+      "expected": "Inconclusive",
+      "observed": "Inconclusive",
+      "correct": true,
+      "request_count_for_chk13": 3,
+      "checked_identity_match": false,
+      "evidence_validated": true,
+      "lab_requests": 34
+    }
+  ],
+  "cases_passed": 3,
+  "cases_total": 3,
+  "limitations": [
+    "Mocked transport; no real browser or external live web target",
+    "Role policy simulated from declared test fixtures",
+    "No independent benchmark accuracy claim",
+    "No secret values in output"
+  ]
+}

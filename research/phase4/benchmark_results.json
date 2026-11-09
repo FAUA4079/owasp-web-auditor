@@ -1,0 +1,567 @@
+{
+  "cases": [
+    {
+      "case_id": "CHK01-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "transport_metadata",
+        "observation": {
+          "final_body_bytes": 15,
+          "final_scheme": "https",
+          "final_status_code": 200,
+          "initial_scheme": "http",
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 2,
+      "rule_id": "CHK01"
+    },
+    {
+      "case_id": "CHK01-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "transport_metadata",
+        "observation": {
+          "final_body_bytes": 15,
+          "final_scheme": "http",
+          "final_status_code": 200,
+          "initial_scheme": "http",
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 1,
+      "rule_id": "CHK01"
+    },
+    {
+      "case_id": "CHK02-SECURE-01",
+      "correct_on_scored_cases": null,
+      "evidence": {
+        "kind": "header_configuration_metadata",
+        "observation": {
+          "content_type_present": true,
+          "declared_html": true,
+          "frame_ancestors_present": true,
+          "http_status": 200,
+          "nosniff_recognized": true,
+          "x_frame_options_present": false,
+          "x_frame_options_recognized": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Inconclusive",
+      "observed_indicator_label": "abstained",
+      "request_count": 0,
+      "rule_id": "CHK02"
+    },
+    {
+      "case_id": "CHK02-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "header_configuration_metadata",
+        "observation": {
+          "content_type_present": true,
+          "declared_html": true,
+          "frame_ancestors_present": false,
+          "http_status": 200,
+          "nosniff_recognized": true,
+          "x_frame_options_present": false,
+          "x_frame_options_recognized": false
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 0,
+      "rule_id": "CHK02"
+    },
+    {
+      "case_id": "CHK03-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "header_configuration_metadata",
+        "observation": {
+          "content_type_present": true,
+          "declared_html": true,
+          "frame_ancestors_present": true,
+          "http_status": 200,
+          "nosniff_recognized": true,
+          "x_frame_options_present": false,
+          "x_frame_options_recognized": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 0,
+      "rule_id": "CHK03"
+    },
+    {
+      "case_id": "CHK03-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "header_configuration_metadata",
+        "observation": {
+          "content_type_present": true,
+          "declared_html": true,
+          "frame_ancestors_present": true,
+          "http_status": 200,
+          "nosniff_recognized": false,
+          "x_frame_options_present": false,
+          "x_frame_options_recognized": false
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 0,
+      "rule_id": "CHK03"
+    },
+    {
+      "case_id": "CHK04-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "cookie_attribute_metadata",
+        "observation": {
+          "cookies": [
+            {
+              "concerns": [],
+              "domain_attribute_present": false,
+              "expires_attribute_present": false,
+              "header_index": 1,
+              "httponly": true,
+              "max_age_attribute_present": false,
+              "path_attribute_present": true,
+              "purpose": "unknown",
+              "samesite": "lax",
+              "secure": true
+            }
+          ],
+          "header_limit_reached": false,
+          "parse_errors": 0,
+          "parsed_cookie_count": 1,
+          "set_cookie_header_count": 1
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 0,
+      "rule_id": "CHK04"
+    },
+    {
+      "case_id": "CHK04-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "cookie_attribute_metadata",
+        "observation": {
+          "cookies": [
+            {
+              "concerns": [
+                "secure_attribute_missing",
+                "httponly_attribute_missing",
+                "samesite_not_explicit"
+              ],
+              "domain_attribute_present": false,
+              "expires_attribute_present": false,
+              "header_index": 1,
+              "httponly": false,
+              "max_age_attribute_present": false,
+              "path_attribute_present": true,
+              "purpose": "unknown",
+              "samesite": "missing",
+              "secure": false
+            }
+          ],
+          "header_limit_reached": false,
+          "parse_errors": 0,
+          "parsed_cookie_count": 1,
+          "set_cookie_header_count": 1
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 0,
+      "rule_id": "CHK04"
+    },
+    {
+      "case_id": "CHK05-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "redacted_error_structure",
+        "observation": {
+          "http_status": 200,
+          "signature_limit_reached": false,
+          "signatures": [],
+          "text_inspection_limited": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 0,
+      "rule_id": "CHK05"
+    },
+    {
+      "case_id": "CHK05-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "redacted_error_structure",
+        "observation": {
+          "http_status": 200,
+          "signature_limit_reached": false,
+          "signatures": [
+            {
+              "context": "Python traceback marker observed nearby.",
+              "redacted_excerpt": "File \"[REDACTED_PATH]\", line 2",
+              "type": "python_traceback_with_absolute_path"
+            }
+          ],
+          "text_inspection_limited": false
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 0,
+      "rule_id": "CHK05"
+    },
+    {
+      "case_id": "CHK06-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "directory_listing_structure",
+        "observation": {
+          "directory_url": true,
+          "http_status": 200,
+          "listing_container_present": false,
+          "local_child_links": 0,
+          "matching_title_and_heading": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 0,
+      "rule_id": "CHK06"
+    },
+    {
+      "case_id": "CHK06-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "directory_listing_structure",
+        "observation": {
+          "directory_url": true,
+          "http_status": 200,
+          "listing_container_present": true,
+          "local_child_links": 1,
+          "matching_title_and_heading": true
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 0,
+      "rule_id": "CHK06"
+    },
+    {
+      "case_id": "CHK07-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "query_reflection_comparison",
+        "observation": {
+          "baseline_status": 200,
+          "marker_in_baseline": false,
+          "marker_in_probe": false,
+          "parameter": "q",
+          "probe_status": 200,
+          "reflection_context": {
+            "contexts": [],
+            "inspection_limited": false,
+            "occurrence_limit_reached": false,
+            "occurrences_in_prefix": 0,
+            "state": "not_observed_in_prefix"
+          },
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 2,
+      "rule_id": "CHK07"
+    },
+    {
+      "case_id": "CHK07-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "query_reflection_comparison",
+        "observation": {
+          "baseline_status": 200,
+          "marker_in_baseline": false,
+          "marker_in_probe": true,
+          "parameter": "q",
+          "probe_status": 200,
+          "reflection_context": {
+            "contexts": [
+              "plain_text"
+            ],
+            "inspection_limited": false,
+            "occurrence_limit_reached": false,
+            "occurrences_in_prefix": 1,
+            "state": "classified"
+          },
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 2,
+      "rule_id": "CHK07"
+    },
+    {
+      "case_id": "CHK08-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "exceptional_input_comparison",
+        "observation": {
+          "baseline_error_indicators": [],
+          "baseline_status": 200,
+          "disclosure_inspection_supported": true,
+          "new_error_indicator_types": [],
+          "parameter": "id",
+          "probe_error_indicators": [],
+          "probe_status": 400,
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 2,
+      "rule_id": "CHK08"
+    },
+    {
+      "case_id": "CHK08-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "exceptional_input_comparison",
+        "observation": {
+          "baseline_error_indicators": [],
+          "baseline_status": 200,
+          "disclosure_inspection_supported": true,
+          "new_error_indicator_types": [],
+          "parameter": "id",
+          "probe_error_indicators": [],
+          "probe_status": 500,
+          "stop_reason": null
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 2,
+      "rule_id": "CHK08"
+    },
+    {
+      "case_id": "CHK09-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "anonymous_probe": false,
+          "baseline_status": 200,
+          "owner_control_stable": true,
+          "private_resource_match": false,
+          "probe_status": 404
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 3,
+      "rule_id": "CHK09"
+    },
+    {
+      "case_id": "CHK09-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "anonymous_probe": false,
+          "baseline_status": 200,
+          "owner_control_stable": true,
+          "private_resource_match": true,
+          "probe_status": 200
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Confirmed",
+      "observed_indicator_label": "positive",
+      "request_count": 3,
+      "rule_id": "CHK09"
+    },
+    {
+      "case_id": "CHK10-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "anonymous_probe": true,
+          "baseline_status": 200,
+          "owner_control_stable": true,
+          "private_resource_match": false,
+          "probe_status": 401
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 3,
+      "rule_id": "CHK10"
+    },
+    {
+      "case_id": "CHK10-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "anonymous_probe": true,
+          "baseline_status": 200,
+          "owner_control_stable": true,
+          "private_resource_match": true,
+          "probe_status": 200
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Confirmed",
+      "observed_indicator_label": "positive",
+      "request_count": 3,
+      "rule_id": "CHK10"
+    },
+    {
+      "case_id": "CHK11-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "baseline_count": 2,
+          "baseline_stable": true,
+          "literal_rejection_observed": true,
+          "negative_control_count": 0,
+          "probe_pairs": 2,
+          "repeatable_boolean_differential": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 7,
+      "rule_id": "CHK11"
+    },
+    {
+      "case_id": "CHK11-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "baseline_count": 2,
+          "baseline_stable": true,
+          "literal_rejection_observed": false,
+          "negative_control_count": 0,
+          "probe_pairs": 2,
+          "repeatable_boolean_differential": true
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Potential",
+      "observed_indicator_label": "positive",
+      "request_count": 7,
+      "rule_id": "CHK11"
+    },
+    {
+      "case_id": "CHK12-SECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "baseline_status": 200,
+          "logout_status": 204,
+          "probe_status": 401,
+          "replayed_identity_matches": false
+        }
+      },
+      "expected_indicator_label": "negative",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "No Issue Observed",
+      "observed_indicator_label": "negative",
+      "request_count": 3,
+      "rule_id": "CHK12"
+    },
+    {
+      "case_id": "CHK12-INSECURE-01",
+      "correct_on_scored_cases": true,
+      "evidence": {
+        "kind": "bounded_authenticated_comparison",
+        "observation": {
+          "baseline_status": 200,
+          "logout_status": 204,
+          "probe_status": 200,
+          "replayed_identity_matches": true
+        }
+      },
+      "expected_indicator_label": "positive",
+      "fixture_class": "controlled_mock_http_or_auditshop",
+      "observed_check_status": "Confirmed",
+      "observed_indicator_label": "positive",
+      "request_count": 3,
+      "rule_id": "CHK12"
+    }
+  ],
+  "claims": "Metrics describe indicator detection in these fixtures only. Potential is not confirmed exploitation. Inconclusive is abstention.",
+  "generated_at": "2026-11-08T07:33:02.990124+00:00",
+  "methodology": "Controlled deterministic mock-HTTP and existing AuditShop fixture execution; not external benchmarks or real-world vulnerabilities.",
+  "metrics": {
+    "abstained": 1,
+    "false_positive_rate_on_scored": 0.0,
+    "fn": 0,
+    "fp": 0,
+    "precision": 1.0,
+    "recall_on_scored": 1.0,
+    "scored_fraction": 0.9583333333333334,
+    "tn": 11,
+    "total": 24,
+    "tp": 12
+  },
+  "schema_version": 1,
+  "source_fixture_spec_sha256": "1763f6f8805ac3ebbe5b1f904c1c409fbd85fe3b0b9fd58c1a80a87fe5cd7460"
+}

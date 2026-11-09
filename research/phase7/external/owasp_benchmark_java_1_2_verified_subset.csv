@@ -1,0 +1,16 @@
+# test name, category, real vulnerability, cwe, Benchmark version: 1.2, 2016-06-1
+BenchmarkTest00008,sqli,true,89
+BenchmarkTest00016,securecookie,false,614
+BenchmarkTest00018,sqli,true,89
+BenchmarkTest00052,sqli,false,89
+BenchmarkTest00087,securecookie,true,614
+BenchmarkTest00088,securecookie,false,614
+BenchmarkTest00100,sqli,true,89
+BenchmarkTest00104,sqli,false,89
+BenchmarkTest00105,sqli,false,89
+BenchmarkTest00107,sqli,false,89
+BenchmarkTest00169,securecookie,true,614
+BenchmarkTest00170,securecookie,true,614
+BenchmarkTest00655,securecookie,false,614
+BenchmarkTest00903,securecookie,true,614
+BenchmarkTest00904,securecookie,false,614

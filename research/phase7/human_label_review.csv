@@ -1,0 +1,16 @@
+case_id,source_expected_vulnerability,mapped_check,review_status,reviewer,review_reference,notes
+BenchmarkTest00008,true,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00016,false,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00018,true,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00052,false,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00087,true,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00088,false,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00100,true,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00104,false,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00105,false,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00107,false,CHK11,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00169,true,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00170,true,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00655,false,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00903,true,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
+BenchmarkTest00904,false,CHK04,PENDING,,,Needs independent human confirmation of endpoint compatibility and ground truth
