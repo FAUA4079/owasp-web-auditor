@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OWASP Web Auditor remote URL fixture for synthetic HTTP checks.">
+<title>OWASP Web Auditor | Public Test Range</title>
+<style>
+:root{color-scheme:dark;--bg:#071019;--panel:#101d2a;--edge:#2a3947;--txt:#e8f5f4;--muted:#a8bbc0;--mint:#54eac0;--yellow:#ffd18e;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#12454d 0%,#071019 42%);color:var(--txt)}
+main{max-width:1110px;margin:auto;padding:30px 22px 70px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--edge);padding:8px 0 25px}
+.brand{font-weight:900;letter-spacing:.14em;color:var(--mint);font-size:14px}header .tag{border:1px solid #48646a;border-radius:99px;font-size:12px;color:#c3d7d6;padding:9px 12px}
+h1{font-size:clamp(2.4rem,7vw,5.1rem);letter-spacing:-.06em;line-height:1.05;margin:65px 0 20px}h1 span{color:var(--mint)}p{color:var(--muted);line-height:1.7}
+.lead{font-size:1.15rem;max-width:740px}.notice{background:#201e1b;border-left:4px solid var(--yellow);border-radius:5px 12px 12px 5px;padding:15px 20px;margin:29px 0 40px;color:#e7dccb}
+.stats{display:flex;gap:15px;flex-wrap:wrap}.stat{border:1px solid var(--edge);background:var(--panel);padding:16px 22px;border-radius:13px;min-width:158px}.stat strong{display:block;font-size:29px}.stat small{color:var(--muted)}
+h2{margin:42px 0 18px;font-size:1.4rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:21px;min-height:185px}.card .id{color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.1em}.card h3{font-size:18px;margin:10px 0}.card p{font-size:14px;margin:0}.card .mode{font-size:11px;border:1px solid #47616b;color:#b7c9d0;display:inline-block;padding:5px 8px;border-radius:30px;margin-top:14px}
+a{color:var(--mint)}a:hover{color:#fff}.commands{background:#020b10;border:1px solid var(--edge);border-radius:13px;padding:19px;color:#b8f6e4;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8}
+.demo{background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:21px}.demo input{width:min(100%,390px);background:#05131e;border:1px solid #47606a;border-radius:8px;color:#fff;padding:12px;font:inherit}.demo button{border:0;border-radius:8px;padding:12px 17px;margin-left:8px;background:var(--mint);color:#00271e;font-weight:750;cursor:pointer}.demo output{font-family:monospace;color:#e7f5f6;display:block;word-break:break-all;margin-top:12px}
+footer{margin-top:50px;border-top:1px solid var(--edge);padding-top:20px;color:var(--muted);font-size:13px}
+</style></head>
+<body><main>
+<header><div class="brand">OWA / TEST RANGE</div><div class="tag">PUBLIC STATIC FIXTURE · NO REAL DATA</div></header>
+<h1>Audit the <span>evidence.</span><br>Not just a score.</h1>
+<p class="lead">A public, intentionally simplified test website for <a href="https://github.com/FAUA4079/owasp-web-auditor">OWASP Web Auditor</a>. These URLs let you exercise supported response inspections using an actual hosted HTTPS website.</p>
+<div class="notice"><strong>Important:</strong> GitHub Pages hosts static files only. It does not support Python server-side behavior, login sessions, database access, dynamic Set-Cookie responses or backend RBAC. CHK09–CHK13 need a separate running AuditShop-compatible backend. The pages here are synthetic fixtures, not a real compromise.</div>
+<div class="stats"><div class="stat"><strong>13</strong><small>Auditor check IDs</small></div><div class="stat"><strong>2</strong><small>Inspectable static fixtures</small></div><div class="stat"><strong>0</strong><small>Real accounts or secrets</small></div></div>
+<h2>Public URL fixtures</h2>
+<div class="grid">
+<article class="card"><div class="id">CHK01–03</div><h3>Transport & headers</h3><p>Scan this HTTPS root to inspect redirect and hosted response headers. GitHub controls the production headers.</p><span class="mode">LIVE RESPONSE</span></article>
+<article class="card"><div class="id">CHK04</div><h3>Cookie attributes</h3><p>GitHub Pages does not let this site set intentionally weak server cookies. Check is normally Not Tested.</p><span class="mode">BACKEND REQUIRED</span></article>
+<article class="card"><div class="id">CHK05</div><h3><a href="error.html">Fake traceback fixture</a></h3><p>A clearly labeled fictional traceback for testing the auditor's textual pattern detector. This is not an actual backend failure.</p><span class="mode">INSPECTABLE FIXTURE</span></article>
+<article class="card"><div class="id">CHK06</div><h3><a href="listing/">Listing-style fixture</a></h3><p>Autoindex-shaped HTML page with dummy filenames and a matching directory-path heading.</p><span class="mode">INSPECTABLE FIXTURE</span></article>
+<article class="card"><div class="id">CHK07–08</div><h3>Query probes</h3><p>Server-side reflection and malformed numeric-input handling cannot be implemented by GitHub Pages.</p><span class="mode">BACKEND REQUIRED</span></article>
+<article class="card"><div class="id">CHK09–13</div><h3>Auth, SQL & RBAC</h3><p>Use the local AuditShop-compatible synthetic backend for authorization, SQL differential and logout replay checks.</p><span class="mode">BACKEND REQUIRED</span></article>
+</div>
+<h2>Try a browser-only query preview</h2>
+<div class="demo"><p>JavaScript can reflect an input in your own browser. This does <strong>not</strong> produce server-side reflection and the OWASP Auditor HTTP client will not detect it as CHK07.</p><form id="demo"><input name="echo" id="echo" autocomplete="off" placeholder="Try a harmless test marker"><button>Preview</button></form><output id="result">No marker entered.</output></div>
+<h2>Scan the hosted URL with your tool</h2>
+<pre class="commands">python -m auditor --url https://faua4079.github.io/owasp-web-auditor/ --no-crawl --checks CHK01,CHK02,CHK03
+python -m auditor --url https://faua4079.github.io/owasp-web-auditor/error.html --no-crawl --checks CHK05
+python -m auditor --url https://faua4079.github.io/owasp-web-auditor/listing/ --no-crawl --checks CHK06</pre>
+<p>Run only after GitHub Pages is enabled for this repository. Review each observation; a “Potential” response on synthetic data is not an exploitable vulnerability.</p>
+<footer>OWASP Web Auditor · Synthetic testing environment · Hosted without real sessions, credentials, personal data or secrets.</footer>
+</main>
+<script>const form=document.getElementById('demo'),input=document.getElementById('echo'),result=document.getElementById('result');function show(v){result.textContent=v||'No marker entered.'}const initial=new URLSearchParams(location.search).get('echo');if(initial){input.value=initial;show(initial)}form.addEventListener('submit',e=>{e.preventDefault();show(input.value);history.replaceState(null,'',input.value?'?echo='+encodeURIComponent(input.value):location.pathname)})</script>
+</body></html>
